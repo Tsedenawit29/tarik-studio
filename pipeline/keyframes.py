@@ -23,14 +23,16 @@ def generate_image(
     out_path: Path,
     steps: int = 4,
 ) -> None:
-    """Call Cloudflare Workers AI image model and write PNG bytes to out_path."""
+    """Call Cloudflare Workers AI image model and write PNG bytes to out_path.
+
+    Note: FLUX-1-schnell on Cloudflare does not accept width, height or seed.
+    It returns a default-sized image. We resize to our target after download.
+    The seed is recorded in runs.jsonl for documentation but not sent to the API.
+    """
     url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}"
     payload = {
         "prompt": prompt,
-        "seed": seed,
         "steps": steps,
-        "width": WIDTH,
-        "height": HEIGHT,
     }
     r = requests.post(
         url,
@@ -46,9 +48,21 @@ def generate_image(
         if not data.get("success", True):
             raise RuntimeError(f"Cloudflare API error: {data.get('errors')}")
         img_b64 = data["result"]["image"]
-        out_path.write_bytes(base64.b64decode(img_b64))
+        raw_bytes = base64.b64decode(img_b64)
     else:
-        out_path.write_bytes(r.content)
+        raw_bytes = r.content
+
+    # Write raw image first, then resize to target dimensions with FFmpeg
+    tmp = out_path.with_suffix(".tmp.png")
+    tmp.write_bytes(raw_bytes)
+    import subprocess
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-i", str(tmp),
+         "-vf", f"scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,crop={WIDTH}:{HEIGHT}",
+         str(out_path)],
+        check=True,
+    )
+    tmp.unlink(missing_ok=True)
 
 
 def build_shot_prompt(shot: dict, sb: dict) -> str:
