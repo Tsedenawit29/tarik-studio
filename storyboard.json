@@ -1,0 +1,222 @@
+{
+  "title": "The Ink That Survived the Water",
+  "logline": "In a time of war, Ethiopian scholars hid their written history on the islands of Lake Tana; today a new generation tells it with new tools.",
+  "language": "am-ET",
+  "audience": "Young Ethiopians and diaspora aged 18-35, watching on a phone in vertical format (PROPOSED: confirm in DESIGN.md).",
+  "intent": "Feel pride in a heritage that was protected at great cost, and a duty to keep retelling it (PROPOSED: confirm).",
+  "style_block": "Cinematic 35mm film look, fine grain, natural light, muted earth tones with gold and deep indigo, shallow depth of field, no text, no watermark",
+  "negative_style": "text, letters, logos, watermark, modern clothing in historical scenes, visible faces",
+  "character": {
+    "name": "The scholar",
+    "description": "Recurring figure: an Ethiopian Orthodox scholar-monk in a white cotton gabi shawl with weathered hands, always shown from behind, in silhouette, or as hands only; face never visible.",
+    "real_person": false,
+    "seed": 42
+  },
+  "narration_style": "calm, warm, reverent, unhurried storyteller",
+  "music": {
+    "caption": "Slow cinematic ambient score with Ethiopian-inspired texture: soft bamboo flute, gentle hand-drum pulse, plucked harp strings, warm low drone; reverent and introspective, builds gently, resolves quietly; no strong lead melody",
+    "bpm": 72,
+    "duration_s": 75,
+    "instrumental": true,
+    "seed": 7,
+    "cues": [
+      {
+        "at_s": 0,
+        "note": "Solitary Ethiopian washint bamboo flute sustained low note over warm ambient drone, gentle water lapping"
+      },
+      {
+        "at_s": 7,
+        "note": "Soft rhythmic kebero drum heartbeat enters, slow and tense"
+      },
+      {
+        "at_s": 15,
+        "note": "Expressive masinko single-string bowing swells softly over steady kebero pulse"
+      },
+      {
+        "at_s": 22,
+        "note": "Harmonic resolution into a warm, reverent major chord with subtle morning birdsong"
+      },
+      {
+        "at_s": 30,
+        "note": "Delicate, meditative plucking of an Ethiopian begena harp"
+      },
+      {
+        "at_s": 38,
+        "note": "Begena and washint duet weaving a warm, historical melody"
+      },
+      {
+        "at_s": 46,
+        "note": "Emotional crescendo with layered strings and traditional Ethiopian instrumentation"
+      },
+      {
+        "at_s": 53,
+        "note": "Expansive, open orchestral swell as percussion drops out"
+      },
+      {
+        "at_s": 60,
+        "note": "Clean modern warm synth pulse blends smoothly with the washint flute motif"
+      },
+      {
+        "at_s": 68,
+        "note": "Single final resonant begena bass string note decaying naturally into silence"
+      }
+    ]
+  },
+  "shots": [
+    {
+      "id": "s01",
+      "reason": "Establishes the place and mood: a boat crossing Lake Tana at dawn, history hidden by water.",
+      "shot_size": "extreme_wide",
+      "image_prompt": "Cinematic wide shot at dawn, thick silver mist hovering over glassy Lake Tana in Ethiopia, a traditional solitary papyrus tankwa reed boat gliding silently toward a dark forested island, moody blue and gold lighting",
+      "motion_prompt": "Slow forward drone glide skimming just above the water surface following the reed boat into the mist, subtle ripples on the lake",
+      "motion": "wan",
+      "kenburns": "push_in",
+      "seed": 1001,
+      "min_duration_s": 7,
+      "narration": {
+        "text": "ታሪክ ሁልጊዜ በሰይፍ አይጠበቅም… አንዳንዴ በቀለም እና በብራና ተጽፎ በውኃ መሃል ይሸሸጋል።",
+        "english": "History is not always guarded by the sword... sometimes it is written in ink on parchment and hidden in the middle of the water."
+      }
+    },
+    {
+      "id": "s02",
+      "reason": "Introduces the threat and the scholar's urgent choice, creating tension.",
+      "shot_size": "wide",
+      "image_prompt": "16th century Ethiopian highlands at dusk, distant hills glowing with amber smoke on the horizon, silhouette of an Ethiopian Orthodox scholar monk hurrying down a rocky lakeshore clutching a thick leather-wrapped manuscript bundle, dramatic chiaroscuro lighting",
+      "motion_prompt": "Handheld tracking shot moving briskly alongside the silhouette as wind blows his white gabi shawl, embers drifting in the distant sky",
+      "motion": "kenburns",
+      "kenburns": "pan_right",
+      "seed": 1002,
+      "min_duration_s": 8,
+      "narration": {
+        "text": "ከአምስት መቶ ዓመታት በፊት፣ ጦርነትና እሳት የሀገሪቱን ጥንታዊ ገዳማት ሲያወድሙ፣ ሊቃውንቱ አንድ ምርጫ ነበራቸው።",
+        "english": "Five hundred years ago, when war and fire were destroying the country's ancient monasteries, the scholars had only one choice."
+      }
+    },
+    {
+      "id": "s03",
+      "reason": "Close on the hands to carry the effort and risk of the crossing.",
+      "shot_size": "close",
+      "image_prompt": "Close-up cinematic shot of weathered hands gripping a rough wooden oar paddling a papyrus boat through tall lake reeds at night, silver moonlight reflecting on water droplets, shallow depth of field",
+      "motion_prompt": "Gentle rhythmic camera sway matching the rowing motion, water droplets glistening in slow motion",
+      "motion": "kenburns",
+      "kenburns": "push_in",
+      "seed": 1003,
+      "min_duration_s": 7,
+      "narration": {
+        "text": "ሕይወታቸውን አደጋ ላይ ጥለው የኢትዮጵያን ጥበብ፣ ፍልስፍናና ታሪክ ወደ ጣና ደሴቶች አሻገሩ።",
+        "english": "Risking their lives, they carried Ethiopia's wisdom, philosophy and history across to the islands of Lake Tana."
+      }
+    },
+    {
+      "id": "s04",
+      "reason": "Shows the islands as a refuge: the turn from danger to safety.",
+      "shot_size": "wide",
+      "image_prompt": "Ancient lush green forest on Zege peninsula Lake Tana, tall indigenous juniper trees parting to reveal the circular thatched roof and wooden colonnade of Ura Kidane Mehret monastery, golden morning sunbeams piercing through foliage",
+      "motion_prompt": "Slow upward tilt and push-in through the sunlit forest canopy toward the circular monastery sanctuary",
+      "motion": "kenburns",
+      "kenburns": "tilt_up",
+      "seed": 1004,
+      "min_duration_s": 8,
+      "narration": {
+        "text": "በጥቅጥቅ ደን ውስጥ የተሰወሩት እነዚህ ደሴቶች፣ የማይደፈሩ የታሪክ ምሽጎች ሆኑ።",
+        "english": "Hidden in dense forest, these islands became impregnable fortresses of history."
+      }
+    },
+    {
+      "id": "s05",
+      "reason": "Shows how the knowledge was physically made: pigments, pen and parchment.",
+      "shot_size": "extreme_close",
+      "image_prompt": "Macro cinematic shot inside a stone scriptorium lit by warm side window light, natural mineral pigments in red ochre, lapis blue, and charcoal beside a hand-carved reed pen and open goatskin parchment with neat Ge'ez calligraphy",
+      "motion_prompt": "Slow macro dolly across the pigments and freshly inked Ge'ez script, dust motes floating in the beam of light",
+      "motion": "wan",
+      "kenburns": "pan_right",
+      "seed": 1005,
+      "min_duration_s": 8,
+      "narration": {
+        "text": "እያንዳንዱ ገጽ ከፍየል ብራና ተዘጋጅቶ፣ ከአፈርና ከዕፅዋት በተቀመመ ቀለም በእጅ ተጻፈ።",
+        "english": "Every page was prepared from goat parchment and written by hand in ink made from earth and plants."
+      }
+    },
+    {
+      "id": "s06",
+      "reason": "Shows what the preserved knowledge expressed: kings, faith and art on the walls.",
+      "shot_size": "medium",
+      "image_prompt": "Interior of a historic Ethiopian circular church, vibrant 17th-century murals painted on earthen walls showing expressive figures, vivid reds, yellows, and blues illuminated by warm beeswax candlelight",
+      "motion_prompt": "Smooth vertical pan upward across the intricate wall paintings as warm candlelight flickers softly",
+      "motion": "wan",
+      "kenburns": "tilt_up",
+      "seed": 1006,
+      "min_duration_s": 8,
+      "narration": {
+        "text": "ግድግዳዎቹ ላይ የተሳሉት ሥዕሎች የነገሥታትን ታሪክ፣ የሕዝቡን እምነትና የዘመኑን ጥበብ በሕያውነት ተናገሩ።",
+        "english": "The paintings on the walls told, vividly, the stories of kings, the faith of the people and the art of the age."
+      }
+    },
+    {
+      "id": "s07",
+      "reason": "The payoff: the manuscript opened, linking the story to the unbroken Ge'ez writing tradition.",
+      "shot_size": "insert",
+      "image_prompt": "Over-the-shoulder close-up of an elderly monk's hands untying a braided leather strap to open an ancient illuminated Ethiopian Ge'ez manuscript, crisp black and red rubricated ink on aged vellum, warm natural light",
+      "motion_prompt": "Gentle push-in as the heavy parchment page turns slightly, revealing intricate geometric borders",
+      "motion": "kenburns",
+      "kenburns": "push_in",
+      "seed": 1007,
+      "min_duration_s": 7,
+      "narration": {
+        "text": "በዚህም ምክንያት ኢትዮጵያ የራሷን ፊደልና የጽሑፍ ታሪክ ሳታቋርጥ ያስቀጠለች ብቸኛዋ የአፍሪካ ሀገር ሆና ቆየች።",
+        "english": "Because of this, Ethiopia remained the only African country to keep its own alphabet and written history unbroken."
+      }
+    },
+    {
+      "id": "s08",
+      "reason": "Metaphor of knowledge flowing across generations like the Blue Nile; widens the scale.",
+      "shot_size": "extreme_wide",
+      "image_prompt": "Sweeping aerial photography pulling back from a green island on Lake Tana toward the roaring cascades of the Blue Nile Falls Tis Abay in Ethiopia, mist rising into a rainbow under golden sunlight",
+      "motion_prompt": "High-altitude aerial pullback and slow pan following the flow of the Blue Nile river",
+      "motion": "kenburns",
+      "kenburns": "pull_out",
+      "seed": 1008,
+      "min_duration_s": 7,
+      "narration": {
+        "text": "ልክ እንደ ዓባይ ወንዝ፣ ይህ ዕውቀትም ከትውልድ ወደ ትውልድ እየፈሰሰ እኛ ጋር ደርሷል።",
+        "english": "Like the Abay river, this knowledge has flowed from generation to generation until it has reached us."
+      }
+    },
+    {
+      "id": "s09",
+      "reason": "Bridges past and present: a young engineer carries the story forward with new technology.",
+      "shot_size": "medium",
+      "image_prompt": "Morning light along the palm-lined shore of Lake Tana in Bahir Dar, a young Ethiopian software engineer seen from behind sitting on a lakeside stone bench with a laptop glowing softly as golden sunrise reflects off the water, modern meets heritage",
+      "motion_prompt": "Slow orbital arc around the lakeside bench as sunrise light warms the water in the background",
+      "motion": "kenburns",
+      "kenburns": "pan_left",
+      "seed": 1009,
+      "min_duration_s": 8,
+      "narration": {
+        "text": "ትናንት አባቶቻችን ታሪካችንን በብራና ጠበቁት፤ ዛሬ ደግሞ እኛ በአዲስ ቴክኖሎጂ ለዓለም እንተርከዋለን።",
+        "english": "Yesterday our fathers protected our history on parchment; today we tell it to the world with new technology."
+      }
+    },
+    {
+      "id": "s10",
+      "reason": "Quiet closing image and call to action, with negative space for the end title.",
+      "shot_size": "extreme_wide",
+      "image_prompt": "Minimalist wide shot of calm Lake Tana at golden sunrise, deep indigo and gold reflections on gentle water ripples, ample negative space in the center for title typography",
+      "motion_prompt": "Locked-off camera, gentle ripples on the water, golden light softly shifting",
+      "motion": "wan",
+      "kenburns": "push_in",
+      "seed": 1010,
+      "min_duration_s": 7,
+      "narration": {
+        "text": "ታሪካችን የኛ ነው—እንጠብቀው፣ እንንገረው።",
+        "english": "Our history is ours. Let us protect it, let us tell it."
+      }
+    }
+  ],
+  "end_card": {
+    "text": "Made with AI",
+    "duration_s": 3
+  }
+}
+
