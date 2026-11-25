@@ -18,8 +18,12 @@ def gemini_text():
     if not (key and model):
         raise RuntimeError("GEMINI_API_KEY / GEMINI_TEXT_MODEL not set")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-    r = requests.post(url, headers={"x-goog-api-key": key}, timeout=60,
-                      json={"contents": [{"parts": [{"text": "Reply with the single word: ready"}]}]})
+    r = requests.post(url, headers={"x-goog-api-key": key, "Content-Type": "application/json"},
+                      json={"contents": [{"parts": [{"text": "Reply with the single word: ready"}]}]},
+                      timeout=60)
+    if r.status_code == 503:
+        print(f"  WARN  {model} returned 503 (high demand, temporary). Will retry later.")
+        return {"warning": "503 high demand"}
     r.raise_for_status()
     return r.json()
 
