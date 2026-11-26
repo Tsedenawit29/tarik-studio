@@ -25,7 +25,7 @@ PRONUNCIATION = {
     "ዓባይ": "አብባይ",
 }
 
-# Map characters / shots to Gemini prebuilt voices
+# Map characters to Gemini prebuilt voices
 CHARACTER_VOICES: dict[str, str] = {
     "narrator": "Aoede",
     "emama_ene": "Kore",
@@ -33,6 +33,7 @@ CHARACTER_VOICES: dict[str, str] = {
     "abush": "Puck",
 }
 
+# Shot-level speaker mapping kept in code so storyboard.json stays schema-valid
 SHOT_SPEAKERS: dict[str, str] = {
     "s03": "ababa",
     "s04": "emama_ene",
@@ -41,7 +42,7 @@ SHOT_SPEAKERS: dict[str, str] = {
     "s10": "abush",
 }
 
-# Optional local laugh SFX clips mixed under the voice on comic moments
+# Optional local laugh SFX clips mixed gently under the voice on comic moments
 SHOT_LAUGH_SFX: dict[str, Path] = {
     "s07": SFX_DIR / "laugh_child.wav",
     "s09": SFX_DIR / "laugh_family.wav",
@@ -102,6 +103,38 @@ def _mix_laugh_if_present(wav_path: Path, sfx_path: Path | None, delay_ms: int =
 
 
 def _synth_gemini_pcm(client: genai.Client, prompt_text: str, voice_name: str) -> bytes:
+    """Generate PCM audio using Gemini TTS via the v1beta REST endpoint.
+    Returns raw PCM bytes decoded from base64.
+    """
+    import base64, json, requests
+    # Construct payload according to Gemini TTS beta spec
+    payload = {
+        "contents": [{"role": "user", "parts": [{"text": prompt_text}]}],
+        "generationConfig": {
+            "responseModalities": ["AUDIO"],
+            "speechConfig": {
+                "voiceConfig": {
+                    "prebuiltVoiceConfig": {"voiceName": voice_name}
+                }
+            }
+        }
+    }
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("Missing GEMINI_API_KEY in environment.")
+    endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_TTS_MODEL}:generateContent"
+    resp = requests.post(endpoint, params={"key": api_key}, json=payload)
+    if resp.status_code != 200:
+        raise RuntimeError(f"Gemini TTS request failed: {resp.status_code} {resp.text}")
+    data = resp.json()
+    # Navigate to audio inline data
+    for candidate in data.get("candidates", []):
+        for part in candidate.get("content", {}).get("parts", []):
+            if "inlineData" in part:
+                audio_b64 = part["inlineData"].get("data")
+                if audio_b64:
+                    return base64.b64decode(audio_b64)
+    raise RuntimeError("Gemini TTS returned no audio data.")
     response = client.models.generate_content(
         model=GEMINI_TTS_MODEL,
         contents=prompt_text,
@@ -185,15 +218,14 @@ def main() -> None:
         if requested_shots and str(sid) not in requested_shots:
             continue
 
-        narration_obj = shot.get("narration", {})
-        speaker = narration_obj.get("speaker") or SHOT_SPEAKERS.get(sid, "narrator")
-        voice_name = CHARACTER_VOICES.get(speaker, CHARACTER_VOICES["narrator"])
+        speaker = SHOT_SPEAKERS.get(sid, "narrator")
+        voice_name = CHARACTER_VOICES["emama_ene"]
 
         sfx_path = SHOT_LAUGH_SFX.get(sid)
         sfx_mtime = str(sfx_path.stat().st_mtime_ns) if sfx_path and sfx_path.exists() else "none"
         model_id = f"gemini-tts:{GEMINI_TTS_MODEL}:{voice_name}"
 
-        raw_text = narration_obj["text"]
+        raw_text = shot["narration"]["text"]
         text = spoken(raw_text)
         key = sha("narration", sid, speaker, text, style, voice_name, language, model_id, sfx_mtime)
         out = NARRATION_DIR / f"{sid}.wav"

@@ -70,7 +70,7 @@
       "id": "s05",
       "reason": "Show Emama slipping out as soon as Ababa goes inside and hurrying down the path",
       "shot_size": "wide",
-      "seed": 105,
+      "seed": 104,
       "image_prompt": "A 60-year-old Ethiopian grandmother tucking her white cotton netela shawl tightly around her waist over a patterned dress and hurrying swiftly along a sunlit dirt trail lined with eucalyptus trees toward a neighboring village, determined expression, photorealistic, 35mm film grain",
       "motion_prompt": "Smooth forward tracking movement following the Ethiopian grandmother walking fast along the path",
       "narration": {
@@ -122,7 +122,7 @@
       "image_prompt": "Warm evening light inside an Ethiopian living room around a traditional coffee tray with jebena, a 60-year-old Ethiopian grandmother laughing warmly in a white netela shawl as she tells a story to a smiling 72-year-old grandfather in a khaki jacket and cap and an 8-year-old boy laughing beside her, photorealistic, 35mm film grain",
       "motion_prompt": "Slow gentle pan across the laughing Ethiopian family gathered in warm evening light",
       "narration": {
-        "text": "ከዛሬ 25 ዓመታት በኋላም እማማ ያንን የአንድ ቀን ታሪክ ስታነሳ አባባ ራሱ ይስቃል—ለእኛ ግን አቡሽ ለእማማ የሰጣት 'እነ ነብር ነሽ' የሚለው ስም የፍቅሯና የፍጥነቷ ምልክት ሆኖ ቀረ።",
+        "text": "ዛሬ ከ 25 ዓመታት በኋላም እማማ ያንን የአንድ ቀን ታሪክ ስታነሳ አባባ ራሱ ይስቃል—ለእኛ ግን አቡሽ ለእማማ የሰጣት 'እነ ነብር ነሽ' የሚለው ስም የፍቅሯና የፍጥነቷ ምልክት ሆኖ ቀረ።",
         "english": "Even 25 years from today, whenever Emama brings up that one-day memory, Ababa himself laughs—and for us, the name 'Ene, you are a leopard' that Abush gave Emama remained the lasting symbol of her love and speed."
       }
     },
