@@ -1,21 +1,23 @@
-"""Stage 1: Generate per-shot narration WAVs via edge-tts + ffmpeg (with dual Amharic voices & optional laugh SFX)."""
+"""Stage 1: Generate per-shot narration WAVs via Gemini TTS + ffmpeg (with character voices & laugh SFX)."""
 from __future__ import annotations
 
-import asyncio
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
 import time
+import wave
 from pathlib import Path
 
-import edge_tts
+from google import genai
+from google.genai import types
 
 from common import OUTPUTS, cached, load_env, load_storyboard, logged_call, sha
 
 NARRATION_DIR = OUTPUTS / "narration"
 SFX_DIR = Path("assets/sfx")
+GEMINI_TTS_MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
 
 # Applied only to TTS input text; storyboard.json remains unchanged.
 PRONUNCIATION = {
@@ -23,13 +25,23 @@ PRONUNCIATION = {
     "ዓባይ": "አብባይ",
 }
 
-# Shot-level voice overrides: Ababa (s03-s04) uses male voice; remaining shots use female voice
-SHOT_VOICES: dict[str, str] = {
-    "s03": "am-ET-AmehaNeural",
-    "s04": "am-ET-AmehaNeural",
+# Map characters / shots to Gemini prebuilt voices
+CHARACTER_VOICES: dict[str, str] = {
+    "narrator": "Aoede",
+    "emama_ene": "Kore",
+    "ababa": "Fenrir",
+    "abush": "Puck",
 }
 
-# Optional local laugh SFX clips mixed gently under the voice on comic moments
+SHOT_SPEAKERS: dict[str, str] = {
+    "s03": "ababa",
+    "s04": "emama_ene",
+    "s06": "emama_ene",
+    "s07": "abush",
+    "s10": "abush",
+}
+
+# Optional local laugh SFX clips mixed under the voice on comic moments
 SHOT_LAUGH_SFX: dict[str, Path] = {
     "s07": SFX_DIR / "laugh_child.wav",
     "s09": SFX_DIR / "laugh_family.wav",
@@ -42,26 +54,27 @@ def spoken(text: str) -> str:
     return text
 
 
-def _prosody_for_shot(sid: str, style: str) -> tuple[str, str]:
-    """Tune speech rate and pitch slightly per character/moment so delivery feels less flat."""
-    if sid in ("s03", "s04"):  # Ababa: slightly slower, grounded
-        return "-6%", "-2Hz"
-    if sid == "s07":  # Abush's playful "እነ ነብር ነሽ!" line: slightly brighter/faster
-        return "+3%", "+2Hz"
-    if sid == "s10":  # Closing title punchline: warm, deliberate
-        return "-8%", "-1Hz"
-    s = (style or "").lower()
-    if "lighthearted" in s or "playful" in s:
-        return "+0%", "+1Hz"
-    return "-4%", "0Hz"
+def _style_instruction(sid: str, speaker: str, style: str) -> str:
+    """Guide Gemini TTS delivery per character and dramatic moment."""
+    base = f"Read this Amharic line naturally in a {style} tone."
+    if speaker == "ababa" or sid in ("s03", "s04"):
+        return f"{base} Speak as a 72-year-old Ethiopian grandfather: grounded, slightly tired or firm, yet caring."
+    if speaker == "emama_ene" or sid in ("s06",):
+        return f"{base} Speak as a 60-year-old Ethiopian grandmother: warm, quick, affectionate, and gently conspiratorial."
+    if speaker == "abush" or sid in ("s07", "s10"):
+        return f"{base} Speak as an energetic, joyful 8-year-old Ethiopian boy bursting with playful excitement and amusement."
+    return f"{base} Speak as a warm, vivid Ethiopian storyteller."
 
 
-async def _synth_mp3(text: str, voice: str, rate: str, pitch: str, mp3_path: Path) -> None:
-    communicate = edge_tts.Communicate(text=text, voice=voice, rate=rate, pitch=pitch)
-    await communicate.save(str(mp3_path))
+def _pcm_to_wav(pcm_bytes: bytes, wav_path: Path, sample_rate: int = 24000, channels: int = 1, sample_width: int = 2) -> None:
+    with wave.open(str(wav_path), "wb") as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(sample_width)
+        wf.setframerate(sample_rate)
+        wf.writeframes(pcm_bytes)
 
 
-def _mix_laugh_if_present(wav_path: Path, sfx_path: Path | None) -> None:
+def _mix_laugh_if_present(wav_path: Path, sfx_path: Path | None, delay_ms: int = 800) -> None:
     if not sfx_path or not sfx_path.exists() or not shutil.which("ffmpeg"):
         return
 
@@ -75,7 +88,7 @@ def _mix_laugh_if_present(wav_path: Path, sfx_path: Path | None) -> None:
             "-i",
             str(sfx_path),
             "-filter_complex",
-            "[1:a]adelay=1800|1800,volume=0.45[laugh];[0:a][laugh]amix=inputs=2:duration=first:dropout_transition=2[out]",
+            f"[1:a]adelay={delay_ms}|{delay_ms},volume=0.45[laugh];[0:a][laugh]amix=inputs=2:duration=first:dropout_transition=2[out]",
             "-map",
             "[out]",
             "-ar",
@@ -88,36 +101,63 @@ def _mix_laugh_if_present(wav_path: Path, sfx_path: Path | None) -> None:
         shutil.move(str(mixed_path), wav_path)
 
 
+def _synth_gemini_pcm(client: genai.Client, prompt_text: str, voice_name: str) -> bytes:
+    response = client.models.generate_content(
+        model=GEMINI_TTS_MODEL,
+        contents=prompt_text,
+        config=types.GenerateContentConfig(
+            response_modalities=["AUDIO"],
+            speech_config=types.SpeechConfig(
+                voice_config=types.VoiceConfig(
+                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                        voice_name=voice_name,
+                    )
+                )
+            ),
+        ),
+    )
+
+    for candidate in response.candidates or []:
+        content = candidate.content
+        if not content or not content.parts:
+            continue
+        for part in content.parts:
+            inline = getattr(part, "inline_data", None)
+            if inline and inline.data:
+                return inline.data
+
+    raise RuntimeError("Gemini TTS returned no audio data.")
+
+
 def synthesize_shot(
+    client: genai.Client,
     sid: str,
+    speaker: str,
     text: str,
     style: str,
-    voice: str,
+    voice_name: str,
     out_path: Path,
     sfx_path: Path | None = None,
 ) -> None:
-    """Synthesize speech with edge-tts, convert to 24kHz mono WAV via ffmpeg, and optionally mix laugh SFX."""
+    """Synthesize speech with Gemini TTS, write 24kHz mono WAV, and optionally mix laugh SFX."""
     NARRATION_DIR.mkdir(parents=True, exist_ok=True)
-    rate, pitch = _prosody_for_shot(sid, style)
+    instruction = _style_instruction(sid, speaker, style)
+    prompt_payload = f"{instruction}\n\nText:\n{text}"
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        tmp_mp3 = Path(tmpdir) / "shot.mp3"
-        tmp_wav = Path(tmpdir) / "shot.wav"
-
-        asyncio.run(_synth_mp3(text=text, voice=voice, rate=rate, pitch=pitch, mp3_path=tmp_mp3))
+        raw_wav = Path(tmpdir) / "raw.wav"
+        pcm_bytes = _synth_gemini_pcm(client=client, prompt_text=prompt_payload, voice_name=voice_name)
+        _pcm_to_wav(pcm_bytes=pcm_bytes, wav_path=raw_wav, sample_rate=24000, channels=1, sample_width=2)
 
         if shutil.which("ffmpeg"):
             subprocess.run(
-                ["ffmpeg", "-y", "-i", str(tmp_mp3), "-ar", "24000", "-ac", "1", str(tmp_wav)],
+                ["ffmpeg", "-y", "-i", str(raw_wav), "-ar", "24000", "-ac", "1", str(out_path)],
                 check=True,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
-            shutil.move(str(tmp_wav), out_path)
         else:
-            fallback_mp3 = out_path.with_suffix(".mp3")
-            shutil.move(str(tmp_mp3), fallback_mp3)
-            out_path = fallback_mp3
+            shutil.move(str(raw_wav), out_path)
 
     _mix_laugh_if_present(out_path, sfx_path)
 
@@ -129,8 +169,12 @@ def main() -> None:
     load_env()
     sb = load_storyboard(validate=True)
 
-    default_voice = os.environ.get("EDGE_TTS_VOICE", "am-ET-AmehaNeural")
-    style = sb.get("narration_style", "warm, lighthearted, affectionate, storytelling")
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("Missing GEMINI_API_KEY in environment.")
+
+    client = genai.Client(api_key=api_key)
+    style = sb.get("narration_style", "warm, vivid, expressive, Ethiopian family storytelling")
     language = sb["language"]
 
     requested_shots = {arg for arg in sys.argv[1:] if not arg.startswith("--")}
@@ -141,37 +185,53 @@ def main() -> None:
         if requested_shots and str(sid) not in requested_shots:
             continue
 
-        voice = SHOT_VOICES.get(sid, default_voice)
+        narration_obj = shot.get("narration", {})
+        speaker = narration_obj.get("speaker") or SHOT_SPEAKERS.get(sid, "narrator")
+        voice_name = CHARACTER_VOICES.get(speaker, CHARACTER_VOICES["narrator"])
+
         sfx_path = SHOT_LAUGH_SFX.get(sid)
         sfx_mtime = str(sfx_path.stat().st_mtime_ns) if sfx_path and sfx_path.exists() else "none"
-        model = f"edge-tts:{voice}"
+        model_id = f"gemini-tts:{GEMINI_TTS_MODEL}:{voice_name}"
 
-        raw_text = shot["narration"]["text"]
+        raw_text = narration_obj["text"]
         text = spoken(raw_text)
-        key = sha("narration", sid, text, style, voice, language, model, sfx_mtime)
+        key = sha("narration", sid, speaker, text, style, voice_name, language, model_id, sfx_mtime)
         out = NARRATION_DIR / f"{sid}.wav"
 
         if dry_run:
             changed = text != raw_text
-            print(f"[{sid}] voice={voice} sfx={sfx_path if sfx_mtime != 'none' else None} changed={changed} | spoken={text}")
+            print(
+                f"[{sid}] speaker={speaker} voice={voice_name} sfx={sfx_path if sfx_mtime != 'none' else None} "
+                f"changed={changed} | spoken={text}"
+            )
             continue
 
-        def produce(path: Path, _sid=sid, _text=text, _voice=voice, _sfx=sfx_path) -> None:
+        def produce(path: Path, _sid=sid, _spk=speaker, _text=text, _voice=voice_name, _sfx=sfx_path) -> None:
             logged_call(
                 stage="narration",
                 shot=_sid,
-                model=model,
+                model=model_id,
                 params={
+                    "speaker": _spk,
                     "voice": _voice,
                     "style": style,
                     "language": language,
                     "chars": len(_text),
                 },
-                fn=lambda: synthesize_shot(_sid, _text, style, _voice, path, sfx_path=_sfx),
+                fn=lambda: synthesize_shot(
+                    client=client,
+                    sid=_sid,
+                    speaker=_spk,
+                    text=_text,
+                    style=style,
+                    voice_name=_voice,
+                    out_path=path,
+                    sfx_path=_sfx,
+                ),
             )
 
         if cached("narration", sid, key, out, produce):
-            time.sleep(0.3)
+            time.sleep(0.4)
 
 
 if __name__ == "__main__":

@@ -1,15 +1,15 @@
 {
   "title": "Ene, You Are a Leopard!",
   "language": "am-ET",
-  "narration_style": "warm, lighthearted, affectionate, storytelling",
+  "narration_style": "warm, vivid, expressive, Ethiopian family storytelling",
   "audience": "Ethiopian families, young viewers, and friends watching on mobile or desktop",
-  "intent": "Share an affectionate, humorous childhood memory where Ene hurries to bring Abush home for lunch and earns the playful nickname 'Ene, you are a leopard!'",
-  "style_block": "Intimate documentary cinematography in warm natural daylight, authentic Ethiopian rural and home textures, 35mm film grain, 16:9 aspect ratio",
+  "intent": "Tell a richly detailed, emotionally warm Ethiopian childhood memory from 25 years ago from today when Ababa (72) and Emama (around 60) lived with their first grandson Abush (8), focusing on one day when he got caught up playing past lunch and called his grandmother Emama 'Ene' and 'Ene, you are a leopard!'",
+  "style_block": "Authentic photorealistic Ethiopian slice-of-life film cinematography in warm natural daylight, rural Ethiopian courtyard and mud-plastered home textures, natural Ethiopian skin tones and facial expressions, 35mm film grain, 16:9 aspect ratio",
   "character": {
-    "description": "Ene is an affectionate, quick-footed Ethiopian grandmother in a traditional shawl who protects Abush and laughs with the family; Ababa is a hardworking grandfather returning home around midday for lunch; Abush is a playful young grandson who loses track of time playing in the neighboring village and calls Ene 'leopard'."
+    "description": "Emama (around 60, affectionately called Ene by her first grandson Abush) is a loving, quick-footed Ethiopian woman wearing a traditional white cotton shawl (netela) with colorful woven border over a patterned dress; Ababa (72) is a dignified, hardworking Ethiopian grandfather with graying hair wearing a faded khaki jacket and cloth cap; Abush (8) is their energetic Ethiopian first grandson who lived with them, wearing a worn t-shirt and shorts."
   },
   "music": {
-    "caption": "Warm Ethiopian krar, washint, and soft acoustic plucks shifting from light midday rhythm to brisk hurry, playful comedy, and warm family laughter",
+    "caption": "Warm Ethiopian krar, washint, and soft acoustic plucks moving from calm midday anticipation to playful urgency, comedy, and warm family laughter",
     "duration_s": 75,
     "instrumental": true
   },
@@ -20,118 +20,118 @@
   "shots": [
     {
       "id": "s01",
-      "reason": "Establish the midday lunch setting and notice that Abush is missing from the yard",
+      "reason": "Open 25 years ago from today, state that Abush (8) lived with them as their first grandson, and focus on one day",
       "shot_size": "wide",
       "seed": 101,
-      "image_prompt": "Bright midday sunlight in a quiet Ethiopian rural courtyard, prepared lunch plates and traditional clay dish waiting near a shaded doorway while the yard is empty, warm documentary style, photorealistic",
-      "motion_prompt": "Slow gentle push-in across the quiet midday courtyard and waiting lunch",
+      "image_prompt": "Bright midday sunlight in an authentic Ethiopian rural courtyard with mud-plastered walls and warm earth tones, steaming injera and wot covered in a woven mesob beside a shaded wooden doorway while chickens peck in the empty dusty yard, photorealistic, 35mm film grain",
+      "motion_prompt": "Slow gentle push-in across the quiet sunlit Ethiopian courtyard toward the covered mesob",
       "narration": {
-        "text": "የቀትር ሰዓት ደርሷል—ምሳ ተዘጋጅቷል፣ ግን የአባባና የእነ የልጅ ልጅ አቡሽ በአቅራቢያ የለም።",
-        "english": "Lunchtime has arrived—the meal is ready, but Ababa and Ene's grandson Abush is nowhere nearby."
+        "text": "ከዛሬ 25 ዓመታት በፊት የአባባና የእማማ የመጀመሪያ የልጅ ልጅ አቡሽ ከእነሱ ጋር ይኖር ነበር። በዚያን ጊዜ በቤታችን አባባ ከሥራ ሲመለስ አቡሽን ሳያይ ማዕድ አይቀርብም፤ በአንድ ቀን ግን ይህ ታሪክ ተፈጠረ—ምሳው ተዘጋጅቶ ጓሮው ጭር ብሎ ነበር።",
+        "english": "Twenty-five years ago from today, Ababa and Emama's very first grandson, Abush, lived with them. Back then in our house, when Ababa returned from work he never sat at the table without seeing Abush; on one day, however, this story happened—lunch was ready and the yard stood silent."
       }
     },
     {
       "id": "s02",
-      "reason": "Show Abush absorbed in play in the neighboring village past lunchtime",
+      "reason": "Show why 8-year-old Abush lost track of time on that day—deep in a competitive village game",
       "shot_size": "medium",
       "seed": 102,
-      "image_prompt": "A young Ethiopian boy named Abush playing energetically outdoors near a neighboring village path in bright daylight, joyful carefree energy, authentic documentary cinematography, photorealistic",
-      "motion_prompt": "Gentle tracking shot following the young boy playing happily outdoors",
+      "image_prompt": "An 8-year-old Ethiopian boy wearing a worn t-shirt and shorts kneeling on a dusty path in a neighboring Ethiopian village under acacia trees, intensely focused and smiling during a pebble and bottle-cap game with friends in bright midday sun, photorealistic, 35mm film grain",
+      "motion_prompt": "Gentle tracking shot circling the 8-year-old Ethiopian boy absorbed in his game",
       "narration": {
-        "text": "አቡሽ ጨዋታ ይዞት ወደ ጎረቤት መንደር ሄዷል—ሰዓት መድረሱን እንኳን ረስቷል።",
-        "english": "Abush went to the neighboring village to play—he even forgot that lunchtime had arrived."
+        "text": "በዚያ ቀን አቡሽ ገና ከጠዋቱ ጓደኞቹን ተከትሎ ወደ ጎረቤት መንደር ወርዶ ነበር። በጨዋታው ሙቀት ውስጥ ፀሐይ መሐል ሰማይ መድረሷንም ሆነ የአባባን የምሳ ሰዓት ፈጽሞ ረስቶታል።",
+        "english": "On that day, Abush had followed his friends down to the neighboring village since morning. Caught up in the heat of the game, he completely forgot that the sun had reached mid-sky and Ababa's lunchtime had arrived."
       }
     },
     {
       "id": "s03",
-      "reason": "Introduce Ababa returning home from work tired and ready for lunch",
+      "reason": "Build tension as 72-year-old Ababa arrives home tired from work and immediately asks Emama for Abush",
       "shot_size": "wide",
       "seed": 103,
-      "image_prompt": "An older Ethiopian grandfather arriving home around midday in warm sunlight, walking into the courtyard with calm posture after work, authentic grounded mood, photorealistic",
-      "motion_prompt": "Slow subtle push-in as the grandfather steps into the courtyard",
+      "image_prompt": "A 72-year-old Ethiopian grandfather with graying hair wearing a faded khaki jacket and cloth cap walking tiredly through a wooden courtyard gate at midday, wiping dust from his brow and glancing around the empty rural yard, photorealistic, 35mm film grain",
+      "motion_prompt": "Slow subtle push-in as the 72-year-old grandfather enters the courtyard looking around",
       "narration": {
-        "text": "አባባ ከሥራ ተመለሰ፤ ቀኑን ደክሞ ስለዋለ፣ ቤቱ ሲረጋጋ ምሳውን ለመብላት ተቀመጠ።",
-        "english": "Ababa returned from work; after a tiring day, once the house settled, he sat down to eat lunch."
+        "text": "ልክ እኩለ ቀን ሲሆን አባባ ደክሞት ከስራ ተመለሰ። ዱላውን ግድግዳው ላይ እንዳስደገፈ ዓይኑ ጓሮውን ቃኘ—እና ድምጹን ከፍ አድርጎ 'እማማ! አቡሽ የት ሄደ?' ሲል ጠየቀ።",
+        "english": "Right at noon, Ababa returned tired from work. The moment he leaned his walking stick against the wall, his eyes scanned the yard—and raising his voice he asked, 'Emama! Where did Abush go?'"
       }
     },
     {
       "id": "s04",
-      "reason": "Capture the moment Ababa asks for Abush and Ene gives a reassuring white lie",
+      "reason": "Show Emama (around 60) giving a quick, protective white lie to keep Ababa calm while he washes up",
       "shot_size": "medium_close",
       "seed": 104,
-      "image_prompt": "Inside a warm Ethiopian home at lunchtime, an older grandfather looking around asking a question while an older grandmother keeps a calm, composed expression so he will not get upset, photorealistic",
-      "motion_prompt": "Slow subtle shot-reverse-shot drift between grandfather and grandmother",
+      "image_prompt": "Inside a warm sunlit Ethiopian doorway, a 60-year-old Ethiopian grandmother wearing a traditional white cotton netela shawl with colorful border over a patterned dress pouring water from a pitcher over her husband's hands while keeping a calm, reassuring smile, photorealistic, 35mm film grain",
+      "motion_prompt": "Subtle slow push-in on the 60-year-old Ethiopian grandmother's composed, knowing face",
       "narration": {
-        "text": "አባባ 'አቡሽ የት አለ?' ሲል ጠየቀ፤ እነ አባባ እንዳይበሳጭ 'እዚሁ አካባቢ ነው' አለች።",
-        "english": "Ababa asked, 'Where is Abush?' So Ababa wouldn't get upset, Ene said, 'He is right around here.'"
+        "text": "እማማ የአባባን ድካምና ቁጣ ስለምታውቅ ፊቷን ሳትለውጥ 'ኧረ እዚሁ ከጓሮው ጀርባ ይጫወታል፤ እጅህን ታጥበህ እስክትቀመጥ እጠራዋለሁ' አለችው።",
+        "english": "Knowing Ababa's exhaustion and temper, Emama didn't flinch: 'Oh, he's playing right behind the backyard; by the time you wash your hands and sit down, I'll call him.'"
       }
     },
     {
       "id": "s05",
-      "reason": "Show Ene hurrying briskly to the next village to fetch Abush quietly",
+      "reason": "Show Emama slipping out as soon as Ababa goes inside and hurrying down the path",
       "shot_size": "wide",
       "seed": 105,
-      "image_prompt": "An older Ethiopian grandmother wearing a traditional shawl hurrying briskly along a sunlit dirt path toward a neighboring village, determined and loving hurry, photorealistic",
-      "motion_prompt": "Smooth forward tracking movement following the grandmother walking briskly down the path",
+      "image_prompt": "A 60-year-old Ethiopian grandmother tucking her white cotton netela shawl tightly around her waist over a patterned dress and hurrying swiftly along a sunlit dirt trail lined with eucalyptus trees toward a neighboring village, determined expression, photorealistic, 35mm film grain",
+      "motion_prompt": "Smooth forward tracking movement following the Ethiopian grandmother walking fast along the path",
       "narration": {
-        "text": "በውስጧ ግን ቸኮለች—አባባ ሳያውቅ አቡሽን ለማምጣት ወደ ሌላኛው መንደር ፈጠነች።",
-        "english": "Inside, however, she hurried—she rushed to the other village to bring Abush before Ababa noticed."
+        "text": "አባባ ወደ ቤት ገብቶ ሲቀመጥ እማማ ነጠላዋን ወገቧ ላይ አጥብቃ አሰረችና ሾልካ ወጣች። በዚያ ጠራራ ፀሐይ እንደ ወጣት እየተጣደፈች ወደ ጎረቤት መንደር ገሰገሰች።",
+        "english": "The second Ababa stepped inside and sat down, Emama tied her shawl tight around her waist and slipped out. Under the blazing midday sun, she hurried like a young woman toward the neighboring village."
       }
     },
     {
       "id": "s06",
-      "reason": "Show Ene lifting Abush onto her back and urging him to hurry home",
+      "reason": "Capture the rescue moment: Emama finds Abush (8), lifts him onto her back, and whispers the secret",
       "shot_size": "medium",
       "seed": 106,
-      "image_prompt": "An older Ethiopian grandmother lifting a young boy onto her back in warm afternoon light near a village path, wrapping her shawl securely so they can hurry home together, affectionate candid moment, photorealistic",
-      "motion_prompt": "Gentle slow camera arc framing grandmother and boy as she carries him on her back",
+      "image_prompt": "Under an acacia tree on an Ethiopian village path, a 60-year-old Ethiopian grandmother in a white netela shawl bending down and lifting an 8-year-old Ethiopian boy in a worn t-shirt and shorts onto her back, wrapping her shawl around him as she turns back toward home in bright afternoon light, photorealistic, 35mm film grain",
+      "motion_prompt": "Gentle slow camera arc as she lifts the 8-year-old boy onto her back and starts moving",
       "narration": {
-        "text": "አቡሽን ስታገኘው ጀርባዋ ላይ አዘለችውና 'ለአባባ እዚሁ ነህ ብያለሁ፣ በፍጥነት እንሂድ' አለችው።",
-        "english": "When she found Abush, she put him on her back and said, 'I told Ababa you're right here—let's go quickly.'"
+        "text": "እማማ አቡሽን አቧራ ላይ ተቀምጦ ስታገኘው ጊዜ አላጠፋችም—ጀርባዋ ላይ አዘለችውና 'ዝም በል፣ ለአባባ እዚሁ ነህ ብያለሁ፤ ሳይነቃብን እንድረስ!' ስትል ሹክ አለችው።",
+        "english": "When Emama found Abush sitting in the dust, she wasted no time—she hoisted him onto her back and whispered, 'Hush, I told Ababa you're right here; let's get back before he notices!'"
       }
     },
     {
       "id": "s07",
-      "reason": "Deliver the signature funny line and laugh as Abush rides on Ene's back",
+      "reason": "Explain Abush's affectionate nickname 'Ene' for his grandmother Emama right as he laughs and cries 'Ene, you are a leopard!'",
       "shot_size": "close",
       "seed": 107,
-      "image_prompt": "A young boy riding on his grandmother's back in warm afternoon sunlight, laughing with bright eyes and playful expression as they move along the path, joyful authentic moment, photorealistic",
-      "motion_prompt": "Slow gentle push-in on the laughing boy riding on his grandmother's back",
+      "image_prompt": "Close-up of a joyful 8-year-old Ethiopian boy in a worn t-shirt resting his chin on his 60-year-old grandmother's shoulder as she carries him briskly down a sunlit rural path, his eyes wide with delight and bursting into a bright laugh, photorealistic, 35mm film grain",
+      "motion_prompt": "Slow gentle push-in on the laughing 8-year-old boy riding on his grandmother's back",
       "narration": {
-        "text": "ጀርባዋ ላይ እንደተቀመጠ፣ አቡሽ ሳቀና 'እነ ነብር ነሽ!' ብሎ በፈገግታ ተናገረ።",
-        "english": "Once seated on her back, Abush laughed and smilingly said, 'Ene, you are a leopard!'"
+        "text": "አቡሽም ሴት አያቱን እማማን በፍቅር «እነ» እያለ ነበር የሚጠራት። የእማማ እርምጃ ፍጥነትና የነፋሱ ሽውታ ያስገረመው አቡሽ ጀርባዋ ላይ እንደተንጠለጠለ ሳቁን መቆጣጠር አቅቶት 'እነ... አንቺ እኮ ነብር ነሽ!' ሲል ጮኸ።",
+        "english": "Abush also lovingly called his grandmother Emama 'Ene.' Amazed by Emama's speed and the rush of the wind, Abush clung to her back unable to hold back his laughter and cried out, 'Ene... you really are a leopard!'"
       }
     },
     {
       "id": "s08",
-      "reason": "Show Ene and Abush heading back with fond warmth as the rush becomes a shared memory",
+      "reason": "Show the narrow escape as Emama and Abush walk in just as Ababa (72) opens the mesob",
       "shot_size": "wide",
       "seed": 108,
-      "image_prompt": "Grandmother and young grandson heading back along the sunlit path in warm late-afternoon light, a warm fond smile on her face as the rush turns into a shared joke, photorealistic",
-      "motion_prompt": "Smooth tracking shot as they head back in warm golden light",
+      "image_prompt": "In warm afternoon sunlight inside an Ethiopian home doorway, a 60-year-old Ethiopian grandmother in a white shawl calmly smoothing her hair as an 8-year-old Ethiopian boy walks innocently toward a 72-year-old grandfather in a faded khaki jacket and cap seated beside a woven mesob, photorealistic, 35mm film grain",
+      "motion_prompt": "Smooth tracking shot following the boy stepping up to the table beside the grandfather",
       "narration": {
-        "text": "የእነ ፈጣን ሩጫና የአቡሽ ቀልድ፣ በቤተሰቡ ውስጥ የማይረሳ ትዝታ ሆኖ ተቀረጸ።",
-        "english": "Ene's fast dash and Abush's joke became an unforgettable memory inside the family."
+        "text": "አባባ ገና መሶቡን ከፍቶ ሲጠራቸው ሁለቱም ምንም እንዳልተፈጠረ እያለከለኩ ገቡ። አባባ የመጀመሪያ የልጅ ልጁን አይቶ ፈገግ አለ—እማማ ግን ላቧን እየጠረገች በድብቅ እፎይ አለች።",
+        "english": "Just as Ababa uncovered the mesob to call them, both walked in catching their breath as if nothing had happened. Ababa smiled seeing his first grandson—while Emama wiped her brow and quietly breathed a sigh of relief."
       }
     },
     {
       "id": "s09",
-      "reason": "Show Ene retelling the story to the family while everyone laughs together",
+      "reason": "Show Emama retelling the memory around evening coffee while Ababa and the family laugh together",
       "shot_size": "wide",
       "seed": 109,
-      "image_prompt": "A warm family gathering in soft evening light inside an Ethiopian home, an older grandmother animatedly telling a story with a big smile while family members laugh together, joyful togetherness, photorealistic",
-      "motion_prompt": "Slow gentle pan across the smiling, laughing family gathered together",
+      "image_prompt": "Warm evening light inside an Ethiopian living room around a traditional coffee tray with jebena, a 60-year-old Ethiopian grandmother laughing warmly in a white netela shawl as she tells a story to a smiling 72-year-old grandfather in a khaki jacket and cap and an 8-year-old boy laughing beside her, photorealistic, 35mm film grain",
+      "motion_prompt": "Slow gentle pan across the laughing Ethiopian family gathered in warm evening light",
       "narration": {
-        "text": "ከዚያ በኋላ እነ ይህን ታሪክ ለቤተሰቡ ስታወራ፣ ሁሉም ሳቅ እየተባባሉ ደጋግመው ይስቃሉ።",
-        "english": "After that, whenever Ene tells this story to the family, everyone shares laughs and laughs again."
+        "text": "ከዛሬ 25 ዓመታት በኋላም እማማ ያንን የአንድ ቀን ታሪክ ስታነሳ አባባ ራሱ ይስቃል—ለእኛ ግን አቡሽ ለእማማ የሰጣት 'እነ ነብር ነሽ' የሚለው ስም የፍቅሯና የፍጥነቷ ምልክት ሆኖ ቀረ።",
+        "english": "Even 25 years from today, whenever Emama brings up that one-day memory, Ababa himself laughs—and for us, the name 'Ene, you are a leopard' that Abush gave Emama remained the lasting symbol of her love and speed."
       }
     },
     {
       "id": "s10",
-      "reason": "Close on the title punchline 'እነ ነብር ነሽ!' in calm evening light",
+      "reason": "Close on the warm dusk courtyard and the signature title",
       "shot_size": "wide",
       "seed": 110,
-      "image_prompt": "Warm golden dusk light over a peaceful Ethiopian courtyard fading into deep dark slate-blue with clean open negative space in the center for Amharic title text, photorealistic",
+      "image_prompt": "Warm golden dusk light settling over a peaceful Ethiopian rural courtyard and dirt path fading into deep twilight blue with clean open center space for Amharic title text, photorealistic, 35mm film grain",
       "motion_prompt": "Ultra-slow static hold fading softly into evening calm",
       "narration": {
         "text": "እነ ነብር ነሽ!",
